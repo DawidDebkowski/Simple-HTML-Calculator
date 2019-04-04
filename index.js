@@ -1,19 +1,33 @@
 function onLoad() {
     const display = document.getElementById("display");
-    let state = "0";
-    let operation = "";
+    let state = "0"; // 1sza z liczb
+    let operation = ""; // operacja do wykonania
+    let operanda = ""; // druga z wybranych liczba
+    const operations = new Map();
+    operations.set("+", ()=> state = (Number(state) + Number(operanda)).toString())
+    operations.set("-", ()=> state = (Number(state) - Number(operanda)).toString())
+    operations.set("*", ()=> state = (Number(state) * Number(operanda)).toString())
+    operations.set("/", ()=> state = (Number(state) / Number(operanda)).toString())
     const render = () => {
-        if (operation !== ""){
+        if (operanda !== "") {
+            display.innerHTML = operanda;
+        }
+        else if (operation !== ""){
             display.innerHTML = operation;
         }
         else display.innerHTML =  state;
     }
     const handle = (key) => {
-        if(!isNaN(Number(state + key))){
+        if(operation === "" && !isNaN(Number(state + key))){
             state += key;  
+        }
+        else if (operation !== "" && !isNaN(Number(operanda + key))){
+            operanda += key;
         }
         else if(["C", "c"].includes(key)){
             state = "0";
+            operation = "";
+            operanda = "";
         }
         else if("Backspace" === key && !isNaN(Number(state.slice(0, -1)))){
             state = state.slice(0, -1)
@@ -27,7 +41,11 @@ function onLoad() {
         if(state!== "0" && state[0] === "0" && ![".", ","].includes(state[1])){
             state = state.slice(1);
         }
-    
+        else if (["=", "Enter"].includes(key)){
+            operations.get(operation)();
+            operation = "";
+            operanda = "";
+        }
         render();
     }
     const handleMouse = (event) => {
