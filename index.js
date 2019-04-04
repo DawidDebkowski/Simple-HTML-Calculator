@@ -8,6 +8,11 @@ function onLoad() {
     operations.set("-", ()=> state = (Number(state) - Number(operanda)).toString())
     operations.set("*", ()=> state = (Number(state) * Number(operanda)).toString())
     operations.set("/", ()=> state = (Number(state) / Number(operanda)).toString())
+    const calculate = () => {
+        operations.get(operation)();
+            operation = "";
+            operanda = "";
+    }
     const render = () => {
         if (operanda !== "") {
             display.innerHTML = operanda;
@@ -36,15 +41,16 @@ function onLoad() {
             }
         }
         else if (["+", "-","*","/"].includes(key)){
+            if(operanda !==""){
+                calculate()
+            }
             operation = key
         }
         if(state!== "0" && state[0] === "0" && ![".", ","].includes(state[1])){
             state = state.slice(1);
         }
         else if (["=", "Enter"].includes(key)){
-            operations.get(operation)();
-            operation = "";
-            operanda = "";
+            calculate()
         }
         render();
     }
