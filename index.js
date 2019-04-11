@@ -3,6 +3,7 @@ function onLoad() {
     let state = "0"; // 1sza z liczb
     let operation = ""; // operacja do wykonania
     let operanda = ""; // druga z wybranych liczba
+    let memory = "";
     const operations = new Map();
     operations.set("+", ()=> state = (Number(state) + Number(operanda)).toString())
     operations.set("-", ()=> state = (Number(state) - Number(operanda)).toString())
@@ -51,6 +52,12 @@ function onLoad() {
         }
         else if (["=", "Enter"].includes(key)){
             calculate()
+        }
+        else if (["M"].includes(key)){
+            memory = state
+        }
+        else if (["MRC"].includes(key)){
+            state = memory
         }
         render();
     }
