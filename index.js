@@ -54,10 +54,16 @@ function onLoad() {
             calculate()
         }
         else if (["M"].includes(key)){
-            memory = state
+            memory = Number(state)
         }
         else if (["MRC"].includes(key)){
             state = memory
+        }
+        else if (["M+"].includes(key)){
+            memory += Number(state)
+        }
+        else if (["M-"].includes(key)){
+            memory -= Number(state)
         }
         render();
     }
