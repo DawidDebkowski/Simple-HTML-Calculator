@@ -4,7 +4,7 @@
 * add memmory (M-, M+, MRC)
 * rewrite as scientific calculator
 
-##plan na zajęcia
+## plan na zajęcia
 * wyrenderować status
 * obsłużyć eventy z klawiatury
 * obsłużyć kliknięcia myszą
@@ -12,10 +12,10 @@
 * obsłużyć wybór operandy
 * wykonać obliczenia
 
-##zadania dodatkowe
+## zadania dodatkowe
 * dodać Backspace
 * po wprowadzeniu modyfikatora wybranie nowej operacji powinno aplikować = i następnie wybierać operację
 * dodanie obsługi pamięci (M-, M+, MRC)
 * przepisać kalkulator jako kalkulator naukowy
 
-#########TAK
+######### TAK
